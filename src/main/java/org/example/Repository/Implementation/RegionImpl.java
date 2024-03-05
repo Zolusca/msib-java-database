@@ -42,7 +42,7 @@ public class RegionImpl implements RegionRepository {
 
     @Override
     public List<Region> getAll() {
-        List<Region> regionList = new ArrayList<>();
+        List<Region> regionList = new LinkedList<>();
         String SQL = "SELECT * FROM region";
 
         // autocloseable preparedStatment
