@@ -5,10 +5,7 @@ import org.example.Repository.Implementation.RegionImpl;
 import org.example.Repository.RegionRepository;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 
-import java.util.AbstractList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class RegionService {
     private RegionRepository regionRepository;
@@ -40,13 +37,14 @@ public class RegionService {
      * @param name
      * @return true (present/ada) and false (absent/tidak ada)
      */
-    private boolean isRegionExist(String name){
+    public boolean isRegionExist(String name) {
         return regionRepository.getByName(name).isPresent();
     }
 
-    public LinkedList<Region> getListOfRegion(){
+
+    public List<Region> getListOfRegion(){
         regionList = regionRepository.getAll();
-        return new LinkedList<>(regionList);
+        return regionList;
     }
 
     /**
@@ -81,15 +79,12 @@ public class RegionService {
         regionRepository.delete(region);
     }
 
-    public Region updateNameRegion(Region newRegion,Region oldRegion ){
+    public Region updateNameRegion(Region newRegion, Region oldRegion) {
 
-        // jika isRegionExist =false atau newName tidak ditemukan di database
-        // dan regionRepository.update = true, berhasil di update
-        if(!isRegionExist(newRegion.getName()) && regionRepository.update(newRegion,oldRegion)){
-            return newRegion;
+        if(!isRegionExist(newRegion.getName()) && regionRepository.update(newRegion,oldRegion)) {
+            return region;
         }
-        // jika kondisi if gagal maka exception
-        throw new RuntimeException("Data nama telah ada "+newRegion.getName());
-
+        throw new RuntimeException("gagal update data");
     }
+
 }
