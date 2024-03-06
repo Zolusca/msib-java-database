@@ -18,10 +18,7 @@ public class Region implements Comparable<Region>{
 
     @Override
     public String toString() {
-        return "Region{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Region name= " + name + '\'';
     }
 
     public int getId() {

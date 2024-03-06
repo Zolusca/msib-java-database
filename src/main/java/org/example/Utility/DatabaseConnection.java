@@ -31,7 +31,9 @@ public class DatabaseConnection {
             this.connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 
         } catch (ClassNotFoundException|SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("######### ERROR #########");
+            System.out.println("Periksa kembali database, apakah sudah menyala");
+            e.printStackTrace();
         }
 
     }

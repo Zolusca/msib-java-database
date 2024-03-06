@@ -11,7 +11,6 @@ import java.util.*;
 
 public class RegionImpl implements RegionRepository {
     protected DatabaseConnection databaseConnection ;
-    protected Region region = null;
     public RegionImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
     }
@@ -58,7 +57,7 @@ public class RegionImpl implements RegionRepository {
             // ubah data ke object region
             // isi ke List
             while (resultSet.next()){
-                region = new Region
+                Region region = new Region
                         (
                           resultSet.getInt("id"),
                           resultSet.getString("name")
@@ -83,6 +82,7 @@ public class RegionImpl implements RegionRepository {
 
     @Override
     public Optional<Region> getById(int id) {
+        Region region =null;
         String SQL = "SELECT * FROM region WHERE id=(?)";
 
         // autocloseable preparedStatment
@@ -120,40 +120,38 @@ public class RegionImpl implements RegionRepository {
 
     @Override
     public Optional<Region> getByName(String name) {
-        String SQL = "SELECT * FROM region WHERE name=(?)";
+        Region region = null;
+        String SQL = "SELECT * FROM region WHERE name=?";
 
-        // autocloseable preparedStatment
-        try(PreparedStatement preparedStatement =
-                    databaseConnection
-                            .getConnection()
-                            .prepareStatement(SQL))
-        {
-            // mengisi value dari SQL
-            preparedStatement.setString(1,name);
+        try (
+                PreparedStatement preparedStatement =
+                        databaseConnection
+                                .getConnection()
+                                .prepareStatement(SQL)
+        ) {
+            // Mengisi parameter pada PreparedStatement
+            preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            // mendapatkan data dari resultSet
-            // ubah data ke object region
-            // isi ke List
-            while (resultSet.next()){
-                region = new Region
-                        (
-                                resultSet.getInt("id"),
-                                resultSet.getString("name")
-                        );
+            // Jika ada hasil dari query, buat objek Region
+            if (resultSet.next()) {
+                region = new Region(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name")
+                );
             }
-
-        }catch (SQLException e) {
-            System.out.println("Kesalahan pada "+RegionImpl.class.getName());
+        } catch (SQLException e) {
+            System.out.println("Kesalahan pada " + RegionImpl.class.getName());
             System.out.println("Mohon cek kembali pada method getByName");
             e.printStackTrace();
 
-        }finally {
+        } finally {
             databaseConnection.closeConnection();
         }
 
         return Optional.ofNullable(region);
     }
+
 
     @Override
     public void delete(Region region) {
@@ -196,7 +194,7 @@ public class RegionImpl implements RegionRepository {
 
             // apabila execute menghasilkan = 0, yakni gagal
             if(preparedStatement.executeUpdate()==0){
-                throw new RuntimeException("Gagal update data "+ region.getName());
+                throw new RuntimeException("Gagal update data "+ regionNew.getName());
             }
 
         }catch (SQLException e) {
