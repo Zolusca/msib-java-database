@@ -16,11 +16,11 @@ public class App
     public static void main(String[] args) {
         PropertiesReader propertiesDatabase      = FactoryPropertiesReader.databasePropDefault();
         DatabaseConnection databaseConfiguration = new DatabaseConnection(propertiesDatabase);
-        RegionRepository regionRepository        = new RegionImpl(databaseConfiguration);
 
-        RegionController regionController = new RegionController(regionRepository);
-        RegionView regionView = new RegionView(regionController);
-        MainView mainView = new MainView(regionView);
+        RegionRepository regionRepository   = new RegionImpl(databaseConfiguration);
+        RegionController regionController   = new RegionController(regionRepository);
+        RegionView regionView               = new RegionView(regionController);
+        MainView mainView                   = new MainView(regionView);
 
         mainView.start();
 

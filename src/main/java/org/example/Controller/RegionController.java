@@ -44,7 +44,7 @@ public class RegionController {
     public void findRegionByName(String name){
         try {
             Region region = regionService.getRegionByName(name);
-            System.out.println(region);
+            System.out.println("Region Ditemukan "+region);
 
         }catch (RuntimeException e){
             System.out.println(e.getMessage());
@@ -70,10 +70,8 @@ public class RegionController {
 
     public void changeNameRegion(int indexOfList,String newName){
 
-        if(listRegionArrayList.isEmpty()){
-            List<Region> result    = regionService.getListOfRegion();
-            listRegionArrayList   = new ArrayList<>(result);
-        }
+        List<Region> result    = regionService.getListOfRegion();
+        listRegionArrayList   = new ArrayList<>(result);
 
         if(indexOfList>listRegionArrayList.size()){
             throw new RuntimeException("inputan invalid");

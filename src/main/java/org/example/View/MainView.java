@@ -12,7 +12,7 @@ public class MainView {
         this.regionView = regionView;
     }
     public void start() {
-        while (true) {
+        while (true){
             homeScreen();
             homeInput();
         }
@@ -47,7 +47,8 @@ public class MainView {
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("-----Inputan Tidak Sesuai-----");
+            System.out.println("** Notifikasi : inputan hanya angka!! **");
+            scanner.next();
         }
     }
 
@@ -64,5 +65,7 @@ public class MainView {
         System.out.println("------------------");
         System.out.println("INPUT DENGAN ANGKA");
         System.out.println("------------------");
+        System.out.print("input : ");
+
     }
 }
