@@ -3,17 +3,16 @@ package org.example.View;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MainView {
-
+public class MainViewCountry {
     private Scanner scanner = new Scanner(System.in);
-    private RegionView regionView ;
+    private CountryView countryView ;
 
-    public MainView(RegionView regionView) {
-        this.regionView = regionView;
+    public MainViewCountry(CountryView countryView) {
+        this.countryView = countryView;
     }
     public void start() {
         while (true){
-            homeScreen();
+            homeScreenCountry();
             homeInput();
         }
     }
@@ -24,21 +23,24 @@ public class MainView {
 
             switch (value) {
                 case 1:
-                    regionView.regionListView();
+                    countryView.countryListView();
                     break;
                 case 2:
-                    regionView.addRegion();
+                    countryView.countryListByIdRegion();
                     break;
                 case 3:
-                    regionView.updateRegionName();
+                    countryView.updateCountry();
                     break;
                 case 4:
-                    regionView.deleteRegion();
+                    countryView.deleteCountry();
                     break;
                 case 5:
-                    regionView.findRegion();
+                    countryView.findCountry();
                     break;
                 case 6:
+                    countryView.addCountry();
+                    break;
+                case 7:
                     System.exit(0);
                     break;
                 default:
@@ -51,22 +53,21 @@ public class MainView {
             scanner.next();
         }
     }
-
-    public void homeScreen(){
+    public void homeScreenCountry(){
         System.out.println("------------------");
         System.out.println("-----Dashboard----");
         System.out.println("------------------");
-        System.out.println("1. List Region");
-        System.out.println("2. Tambah Region");
-        System.out.println("3. Ubah Nama Region");
-        System.out.println("4. Hapus Region");
-        System.out.println("5. Cari Region");
-        System.out.println("6. Keluar");
+        System.out.println("1. List Country");
+        System.out.println("2. List Country By ID Region");
+        System.out.println("3. Ubah Country");
+        System.out.println("4. Hapus Country");
+        System.out.println("5. Cari Country");
+        System.out.println("6. tambah Country");
+        System.out.println("7. Keluar");
         System.out.println("------------------");
         System.out.println("INPUT DENGAN ANGKA");
         System.out.println("------------------");
         System.out.print("input : ");
 
     }
-
 }

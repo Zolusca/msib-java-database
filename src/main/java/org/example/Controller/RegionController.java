@@ -5,11 +5,7 @@ import org.example.Repository.Implementation.RegionImpl;
 import org.example.Repository.RegionRepository;
 import org.example.Service.RegionService;
 
-import java.security.InvalidParameterException;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class RegionController {
     private RegionService regionService;
@@ -17,7 +13,7 @@ public class RegionController {
     private ArrayList<Region> listRegionArrayList;
 
     public RegionController(RegionRepository regionRepository) {
-        this.regionService = new RegionService((RegionImpl) regionRepository);
+        this.regionService = new RegionService(regionRepository);
     }
 
     public void listRegion() {

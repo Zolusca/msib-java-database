@@ -12,8 +12,8 @@ public class RegionService {
     private Region region;
     private List<Region> regionList;
 
-    public RegionService(RegionImpl regionImpl) {
-        regionRepository = regionImpl;
+    public RegionService(RegionRepository regionRepository) {
+        this.regionRepository = regionRepository;
         region           = new Region();
     }
 
