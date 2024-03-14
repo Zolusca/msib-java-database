@@ -2,7 +2,7 @@ package org.example.Entity;
 
 import java.util.Objects;
 
-public class Region implements Comparable<Region>{
+public class Region implements Comparable<Region>,Cloneable{
     private int id;
     private String name;
 
@@ -18,7 +18,10 @@ public class Region implements Comparable<Region>{
 
     @Override
     public String toString() {
-        return "Region name= " + name + '\'';
+        return "Region{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -43,6 +46,11 @@ public class Region implements Comparable<Region>{
         if (o == null || getClass() != o.getClass()) return false;
         Region region = (Region) o;
         return id == region.id && Objects.equals(name, region.name);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override

@@ -5,11 +5,7 @@ import org.example.Repository.Implementation.RegionImpl;
 import org.example.Repository.RegionRepository;
 import org.example.Service.RegionService;
 
-import java.security.InvalidParameterException;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class RegionController {
     private RegionService regionService;
@@ -17,7 +13,7 @@ public class RegionController {
     private ArrayList<Region> listRegionArrayList;
 
     public RegionController(RegionRepository regionRepository) {
-        this.regionService = new RegionService((RegionImpl) regionRepository);
+        this.regionService = new RegionService(regionRepository);
     }
 
     public void listRegion() {
@@ -44,7 +40,7 @@ public class RegionController {
     public void findRegionByName(String name){
         try {
             Region region = regionService.getRegionByName(name);
-            System.out.println(region);
+            System.out.println("Region Ditemukan "+region);
 
         }catch (RuntimeException e){
             System.out.println(e.getMessage());
@@ -70,10 +66,8 @@ public class RegionController {
 
     public void changeNameRegion(int indexOfList,String newName){
 
-        if(listRegionArrayList.isEmpty()){
-            List<Region> result    = regionService.getListOfRegion();
-            listRegionArrayList   = new ArrayList<>(result);
-        }
+        List<Region> result    = regionService.getListOfRegion();
+        listRegionArrayList   = new ArrayList<>(result);
 
         if(indexOfList>listRegionArrayList.size()){
             throw new RuntimeException("inputan invalid");
